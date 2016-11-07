@@ -8,6 +8,7 @@ VERDE=[0,255,0]
 AZUL= [0,0,255]
 NEGRO=[0,0,0]
 ROJO=[255,0,0]
+MORADO=[255,0,255]
 GRIS=[137,137,137]
 BLANCO=[255,255,255]
 
@@ -59,6 +60,8 @@ if __name__ == '__main__':
     tor2.rect.x= 288
     todos.add(tor2)
 
+    temporizador = 40
+    elixir= 5
     cont=0
     reloj=pygame.time.Clock()
     fin=False
@@ -77,9 +80,11 @@ if __name__ == '__main__':
                         print ("icono " + str(ic.id))
                         if ic.id ==1:
                             b = atk1()
-                            cont += 1
-                            b.id = cont
-                            b.rect.center = pygame.mouse.get_pos()
+                            if elixir >= b.costo:
+                                elixir -= b.costo
+                                cont += 1
+                                b.id = cont
+                                b.rect.center = pygame.mouse.get_pos()
                         elif ic.id ==2:
                             b = atk2()
                             cont += 1
@@ -117,7 +122,7 @@ if __name__ == '__main__':
                 for bl in atacantes:
                     if bl.click == True:
                         bl.click = False
-                        
+
                         if bl.rect.x < 200:
                             bl.var_x *= -1
 
@@ -133,12 +138,21 @@ if __name__ == '__main__':
                                     if bl.rect.x > ANCHO:
                                         bl.rect.x = ANCHO/2
                                     col = True
-
+        if (temporizador==0 and elixir<10):
+            elixir += 1
+            temporizador = 40
+        n=0
         pantalla.fill(BLANCO)
         pygame.draw.rect(pantalla,GRIS,[0,530,400,600]) #espacio iconos
         pygame.draw.rect(pantalla,NEGRO,[0,0,600,40])  # espacio tiempo y elixir (cantidad para comprar tropas)
+        while n <= elixir-1:
+            xposini=(n*40)+5
+            pygame.draw.rect(pantalla,MORADO,[xposini,10,30,10])
+            n += 1
         pygame.draw.rect(pantalla,AZUL,[0,332,400,32])   #Rio central solo decorativo
         todos.update(pantalla)
         todos.draw(pantalla)
         pygame.display.update()
         reloj.tick(15)
+        print (elixir)
+        temporizador -= 1

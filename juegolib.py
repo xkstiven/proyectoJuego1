@@ -40,9 +40,11 @@ class atk1(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.image.fill(AMARILLO)
         self.click = False
+        self.costo= 3
         self.var_x=5
         self.var_y=0
         self.vida= 500
+        self.daño= 100
 
     def update(self,surface):
         if self.click:
