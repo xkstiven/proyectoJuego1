@@ -51,12 +51,12 @@ if __name__ == '__main__':
 
     tor1=Torre()
     tor1.rect.y= 120
-    tor1.rect.x= 68
+    tor1.rect.x= 48
     todos.add(tor1)
 
     tor2=Torre()
     tor2.rect.y= 120
-    tor2.rect.x= 268
+    tor2.rect.x= 288
     todos.add(tor2)
 
     cont=0
@@ -117,6 +117,12 @@ if __name__ == '__main__':
                 for bl in atacantes:
                     if bl.click == True:
                         bl.click = False
+                        
+                        if bl.rect.x < 200:
+                            bl.var_x *= -1
+
+                        if bl.rect.y < 364:
+                            bl.rect.y = 365
                         col = True
                         while col:
                             col = False
@@ -135,4 +141,4 @@ if __name__ == '__main__':
         todos.update(pantalla)
         todos.draw(pantalla)
         pygame.display.update()
-        reloj.tick(60)
+        reloj.tick(15)

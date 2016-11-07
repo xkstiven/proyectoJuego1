@@ -40,10 +40,21 @@ class atk1(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.image.fill(AMARILLO)
         self.click = False
+        self.var_x=5
+        self.var_y=0
+        self.vida= 500
 
     def update(self,surface):
         if self.click:
             self.rect.center = pygame.mouse.get_pos()
+        elif self.rect.x <= 48:
+            self.var_x = 0
+            self.var_y = -5
+        elif self.rect.x >= 318:
+            self.var_x=0
+            self.var_y= -5
+        self.rect.x += self.var_x
+        self.rect.y += self.var_y
         surface.blit(self.image,self.rect)
 
 class atk2(pygame.sprite.Sprite):
@@ -54,6 +65,8 @@ class atk2(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.image.fill(NEGRO)
         self.click = False
+        self.var_x=0
+        self.var_y=0
 
     def update(self,surface):
         if self.click:
@@ -68,6 +81,8 @@ class atk3(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.image.fill(AZUL)
         self.click = False
+        self.var_x=0
+        self.var_y=0
 
     def update(self,surface):
         if self.click:
@@ -82,6 +97,8 @@ class atk4(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.image.fill(ROJO)
         self.click = False
+        self.var_x=0
+        self.var_y=0
 
     def update(self,surface):
         if self.click:
