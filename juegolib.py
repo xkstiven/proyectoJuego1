@@ -11,12 +11,13 @@ AZUL=[0,0,255]
 
 class icono(pygame.sprite.Sprite):
     id=0
-    def __init__(self): #archivo
+    def __init__(self,cost): #archivo
         pygame.sprite.Sprite.__init__(self)
         self.image=pygame.Surface([32,32])
         self.rect=self.image.get_rect()
         self.image.fill(VERDE)
         self.click = False
+        self.costo=cost
 
     def update(self,surface):
         if self.click:

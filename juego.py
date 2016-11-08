@@ -24,28 +24,28 @@ if __name__ == '__main__':
     atacantes=pygame.sprite.Group()
     balas=pygame.sprite.Group()
 
-    ico1=icono()
+    ico1=icono(3)
     ico1.id=1
     ico1.rect.y=ALTO-50
     ico1.rect.x=34
     todos.add(ico1)
     iconos.add(ico1)
 
-    ico1=icono()
+    ico1=icono(3)
     ico1.id=2
     ico1.rect.y=ALTO-50
     ico1.rect.x=134
     todos.add(ico1)
     iconos.add(ico1)
 
-    ico1=icono()
+    ico1=icono(3)
     ico1.id=3
     ico1.rect.y=ALTO-50
     ico1.rect.x=234
     todos.add(ico1)
     iconos.add(ico1)
 
-    ico1=icono()
+    ico1=icono(3)
     ico1.id=4
     ico1.rect.y=ALTO-50
     ico1.rect.x=334
@@ -84,27 +84,33 @@ if __name__ == '__main__':
                     if ic.rect.collidepoint(event.pos):
                         print ("icono " + str(ic.id))
                         if ic.id ==1:
-                            b = atk1()
-                            if elixir >= b.costo:
+                            if elixir >= ic.costo:
+                                b = atk1()
                                 elixir -= b.costo
                                 cont += 1
                                 b.id = cont
                                 b.rect.center = pygame.mouse.get_pos()
                         elif ic.id ==2:
-                            b = atk2()
-                            cont += 1
-                            b.id = cont
-                            b.rect.center = pygame.mouse.get_pos()
+                            if elixir >= ic.costo:
+                                b = atk2()
+                                elixir -= b.costo
+                                cont += 1
+                                b.id = cont
+                                b.rect.center = pygame.mouse.get_pos()
                         elif ic.id ==3:
-                            b = atk3()
-                            cont += 1
-                            b.id = cont
-                            b.rect.center = pygame.mouse.get_pos()
+                            if elixir >= ic.costo:
+                                b = atk3()
+                                elixir -= b.costo
+                                cont += 1
+                                b.id = cont
+                                b.rect.center = pygame.mouse.get_pos()
                         else:
-                            b = atk4()
-                            cont += 1
-                            b.id = cont
-                            b.rect.center = pygame.mouse.get_pos()
+                            if elixir >= ic.costo:
+                                b = atk4()
+                                elixir -= b.costo
+                                cont += 1
+                                b.id = cont
+                                b.rect.center = pygame.mouse.get_pos()
 
 
                         col = True
