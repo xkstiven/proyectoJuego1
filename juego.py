@@ -19,8 +19,10 @@ if __name__ == '__main__':
     pantalla.fill(BLANCO)
 
     todos=pygame.sprite.Group()
+    torres=pygame.sprite.Group()
     iconos=pygame.sprite.Group()
     atacantes=pygame.sprite.Group()
+    balas=pygame.sprite.Group()
 
     ico1=icono()
     ico1.id=1
@@ -53,14 +55,17 @@ if __name__ == '__main__':
     tor1=Torre()
     tor1.rect.y= 120
     tor1.rect.x= 48
-    todos.add(tor1)
+    torres.add(tor1)
 
     tor2=Torre()
     tor2.rect.y= 120
     tor2.rect.x= 288
-    todos.add(tor2)
+    torres.add(tor2)
 
-    temporizador = 40
+    print (tor1.rect.center)
+    print (tor2.rect.center)
+    temporizador = 20
+    temporDis= 40
     elixir= 5
     cont=0
     reloj=pygame.time.Clock()
@@ -111,7 +116,7 @@ if __name__ == '__main__':
                                     b.rect.left = bl.rect.right
                                     col = True
 
-                        todos.add(b)
+                        #todos.add(b)
                         atacantes.add(b)
 
                 for bl in atacantes:
@@ -126,8 +131,12 @@ if __name__ == '__main__':
                         if bl.rect.x < 200:
                             bl.var_x *= -1
 
-                        if bl.rect.y < 364:
-                            bl.rect.y = 365
+                        if bl.rect.y < 395:
+                            bl.rect.y = 396
+                        if bl.rect.x < 60:
+                            bl.rect.x = 150
+                        if bl.rect.x > 308:
+                            bl.rect.x = 250
                         col = True
                         while col:
                             col = False
@@ -140,19 +149,52 @@ if __name__ == '__main__':
                                     col = True
         if (temporizador==0 and elixir<10):
             elixir += 1
-            temporizador = 40
+            temporizador = 30
+        if (temporDis <= 0):
+            if tor1.vida >= 0:
+                b1=Bala(tor1.rect.center[0]-8,(tor1.rect.center[1]+32))
+                balas.add(b1)
+            if tor2.vida >= 0:
+                b2=Bala(tor2.rect.center[0]-8,(tor2.rect.center[1]+32))
+                balas.add(b2)
+            temporDis= 25
+
+        for bal in balas:
+            if bal.rect.y >= 348:
+                balas.remove(bal)
+
         n=0
         pantalla.fill(BLANCO)
         pygame.draw.rect(pantalla,GRIS,[0,530,400,600]) #espacio iconos
         pygame.draw.rect(pantalla,NEGRO,[0,0,600,40])  # espacio tiempo y elixir (cantidad para comprar tropas)
+
+        for atac in atacantes:
+            coli = pygame.sprite.spritecollide(atac,torres,False)
+            for elemento in coli:
+                atac.var_x=0
+                elemento.vida -= atac.daño
+                atacantes.remove(atac)
+            if atac.vida <= 0:
+                atacantes.remove(atac)
+
+        for bal in balas:
+            coli = pygame.sprite.spritecollide(bal,atacantes,False)
+            for elemento in coli:
+                elemento.vida -= bal.daño
+                balas.remove(bal)
+
         while n <= elixir-1:
             xposini=(n*40)+5
             pygame.draw.rect(pantalla,MORADO,[xposini,10,30,10])
             n += 1
-        pygame.draw.rect(pantalla,AZUL,[0,332,400,32])   #Rio central solo decorativo
+        pygame.draw.rect(pantalla,AZUL,[0,364,400,32])   #Rio central solo decorativo
+        atacantes.update(pantalla)
+        balas.update(pantalla)
         todos.update(pantalla)
-        todos.draw(pantalla)
+        torres.update(pantalla)
+        #todos.draw(pantalla)
         pygame.display.update()
         reloj.tick(15)
-        print (elixir)
+        #print (elixir)
         temporizador -= 1
+        temporDis -= 1

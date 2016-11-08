@@ -6,6 +6,7 @@ ROJO=[255,0,0]
 GRIS=[137,137,137]
 BLANCO=[255,255,255]
 AMARILLO=[255,255,0]
+VERAZUL=[0,255,255]
 AZUL=[0,0,255]
 
 class icono(pygame.sprite.Sprite):
@@ -28,6 +29,7 @@ class Torre(pygame.sprite.Sprite):
         self.image=pygame.Surface([64,64])
         self.rect=self.image.get_rect()
         self.image.fill(ROJO)
+        self.vida=3000
 
     def update(self,surface):
         surface.blit(self.image,self.rect)
@@ -44,15 +46,15 @@ class atk1(pygame.sprite.Sprite):
         self.var_x=5
         self.var_y=0
         self.vida= 500
-        self.daño= 100
+        self.daño= 200
 
     def update(self,surface):
         if self.click:
             self.rect.center = pygame.mouse.get_pos()
-        elif self.rect.x <= 48:
+        elif self.rect.x <= 64:
             self.var_x = 0
             self.var_y = -5
-        elif self.rect.x >= 318:
+        elif self.rect.x >= 304:
             self.var_x=0
             self.var_y= -5
         self.rect.x += self.var_x
@@ -67,12 +69,23 @@ class atk2(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.image.fill(NEGRO)
         self.click = False
-        self.var_x=0
+        self.costo= 3
+        self.var_x=5
         self.var_y=0
+        self.vida= 500
+        self.daño= 200
 
     def update(self,surface):
         if self.click:
             self.rect.center = pygame.mouse.get_pos()
+        elif self.rect.x <= 64:
+            self.var_x = 0
+            self.var_y = -5
+        elif self.rect.x >= 304:
+            self.var_x=0
+            self.var_y= -5
+        self.rect.x += self.var_x
+        self.rect.y += self.var_y
         surface.blit(self.image,self.rect)
 
 class atk3(pygame.sprite.Sprite):
@@ -83,12 +96,23 @@ class atk3(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.image.fill(AZUL)
         self.click = False
-        self.var_x=0
+        self.costo= 3
+        self.var_x=5
         self.var_y=0
+        self.vida= 500
+        self.daño= 200
 
     def update(self,surface):
         if self.click:
             self.rect.center = pygame.mouse.get_pos()
+        elif self.rect.x <= 64:
+            self.var_x = 0
+            self.var_y = -5
+        elif self.rect.x >= 304:
+            self.var_x=0
+            self.var_y= -5
+        self.rect.x += self.var_x
+        self.rect.y += self.var_y
         surface.blit(self.image,self.rect)
 
 class atk4(pygame.sprite.Sprite):
@@ -98,11 +122,38 @@ class atk4(pygame.sprite.Sprite):
         self.image=pygame.Surface([32,32])
         self.rect=self.image.get_rect()
         self.image.fill(ROJO)
+        #sonido
         self.click = False
-        self.var_x=0
+        self.costo= 3
+        self.var_x=5
         self.var_y=0
+        self.vida= 500
+        self.daño= 200
 
     def update(self,surface):
         if self.click:
             self.rect.center = pygame.mouse.get_pos()
+        elif self.rect.x <= 64:
+            self.var_x = 0
+            self.var_y = -5
+        elif self.rect.x >= 304:
+            self.var_x=0
+            self.var_y= -5
+        self.rect.x += self.var_x
+        self.rect.y += self.var_y
+        surface.blit(self.image,self.rect)
+
+class Bala(pygame.sprite.Sprite):
+    def __init__(self,x,y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image=pygame.Surface([16,16])
+        self.rect=self.image.get_rect()
+        self.image.fill(VERAZUL)
+        self.rect.x=x
+        self.rect.y=y
+        self.var_y=5
+        self.daño= 200
+
+    def update(self,surface):
+        self.rect.y += self.var_y
         surface.blit(self.image,self.rect)
