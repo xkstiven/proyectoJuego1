@@ -13,7 +13,7 @@ class icono(pygame.sprite.Sprite):
     id=0
     def __init__(self,cost): #archivo
         pygame.sprite.Sprite.__init__(self)
-        self.image=pygame.Surface([32,32])
+        self.image=pygame.Surface([40,40])
         self.rect=self.image.get_rect()
         self.image.fill(VERDE)
         self.click = False
@@ -42,25 +42,26 @@ class atk1(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.image.fill(AMARILLO)
         self.click = False
-        self.costo= 3
         self.ind=0
         self.con=0
         self.dire=2
-        self.var_x=5
+        self.var_x=6
         self.var_y=0
-        self.vida= 500
-        self.daño= 200
+        self.vida= 300
+        self.daño= 1500
+        self.sonido=pygame.mixer.Sound("sonidos/ghost.ogg")
+        self.sonido.play()
 
     def update(self,surface):
         if self.click:
             self.rect.center = pygame.mouse.get_pos()
         elif self.rect.x <= 64:
             self.var_x = 0
-            self.var_y = -5
+            self.var_y = -6
             self.dire= 3
         elif self.rect.x >= 304:
             self.var_x=0
-            self.var_y= -5
+            self.var_y= -6
             self.dire= 3
         self.rect.x += self.var_x
         self.rect.y += self.var_y
@@ -78,25 +79,26 @@ class atk2(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.image.fill(NEGRO)
         self.click = False
-        self.costo= 3
         self.ind=3
         self.dire=2
         self.con=0
-        self.var_x=5
+        self.var_x=3
         self.var_y=0
-        self.vida= 500
-        self.daño= 200
+        self.vida= 700
+        self.daño= 700
+        self.sonido=pygame.mixer.Sound("sonidos/Monster5.ogg")
+        self.sonido.play()
 
     def update(self,surface):
         if self.click:
             self.rect.center = pygame.mouse.get_pos()
         elif self.rect.x <= 64:
             self.var_x = 0
-            self.var_y = -5
+            self.var_y = -3
             self.dire= 3
         elif self.rect.x >= 304:
             self.var_x=0
-            self.var_y= -5
+            self.var_y= -3
             self.dire= 3
         self.rect.x += self.var_x
         self.rect.y += self.var_y
@@ -114,25 +116,26 @@ class atk3(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.image.fill(AZUL)
         self.click = False
-        self.costo= 3
         self.ind=6
         self.dire=2
         self.con=0
-        self.var_x=5
+        self.var_x=4
         self.var_y=0
-        self.vida= 500
-        self.daño= 200
+        self.vida= 1000
+        self.daño= 500
+        self.sonido=pygame.mixer.Sound("sonidos/Monster4.ogg")
+        self.sonido.play()
 
     def update(self,surface):
         if self.click:
             self.rect.center = pygame.mouse.get_pos()
         elif self.rect.x <= 64:
             self.var_x = 0
-            self.var_y = -5
+            self.var_y = -4
             self.dire= 3
         elif self.rect.x >= 304:
             self.var_x=0
-            self.var_y= -5
+            self.var_y= -4
             self.dire= 3
         self.rect.x += self.var_x
         self.rect.y += self.var_y
@@ -150,25 +153,26 @@ class atk4(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.image.fill(ROJO)
         self.click = False
-        self.costo= 3
-        self.var_x=5
+        self.var_x=2
         self.ind=9
         self.con=0
         self.dire=2
         self.var_y=0
-        self.vida= 500
-        self.daño= 200
+        self.vida= 1000
+        self.daño= 300
+        self.sonido=pygame.mixer.Sound("sonidos/Monster1.ogg")
+        self.sonido.play()
 
     def update(self,surface):
         if self.click:
             self.rect.center = pygame.mouse.get_pos()
         elif self.rect.x <= 64:
             self.var_x = 0
-            self.var_y = -5
+            self.var_y = -2
             self.dire= 3
         elif self.rect.x >= 304:
             self.var_x=0
-            self.var_y= -5
+            self.var_y= -2
             self.dire= 3
         self.rect.x += self.var_x
         self.rect.y += self.var_y
@@ -185,7 +189,7 @@ class Bala(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.rect.x=x
         self.rect.y=y
-        self.var_y=5
+        self.var_y=4
         self.daño= 200
 
     def update(self,surface):
