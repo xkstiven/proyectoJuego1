@@ -241,7 +241,7 @@ if __name__ == '__main__':
             coli = pygame.sprite.spritecollide(atac,torres,False)
             for elemento in coli:
                 atac.var_x=0
-                elemento.vida -= atac.daño
+                elemento.vida -= atac.dano
                 atacantes.remove(atac)
             if atac.vida <= 0:
                 golpe.play()
@@ -250,7 +250,7 @@ if __name__ == '__main__':
         for bal in balas:
             coli = pygame.sprite.spritecollide(bal,atacantes,False)
             for elemento in coli:
-                elemento.vida -= bal.daño
+                elemento.vida -= bal.dano
                 balas.remove(bal)
 
         while n <= elixir-1:# ciclo para mostrar el elixir en la barra superir

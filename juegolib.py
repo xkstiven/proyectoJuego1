@@ -48,7 +48,7 @@ class atk1(pygame.sprite.Sprite):
         self.var_x=6
         self.var_y=0
         self.vida= 300
-        self.daño= 1500
+        self.dano= 1500
         self.sonido=pygame.mixer.Sound("sonidos/ghost.ogg")
         self.sonido.play()
 
@@ -85,7 +85,7 @@ class atk2(pygame.sprite.Sprite):
         self.var_x=3
         self.var_y=0
         self.vida= 700
-        self.daño= 700
+        self.dano= 700
         self.sonido=pygame.mixer.Sound("sonidos/Monster5.ogg")
         self.sonido.play()
 
@@ -122,7 +122,7 @@ class atk3(pygame.sprite.Sprite):
         self.var_x=4
         self.var_y=0
         self.vida= 1000
-        self.daño= 500
+        self.dano= 500
         self.sonido=pygame.mixer.Sound("sonidos/Monster4.ogg")
         self.sonido.play()
 
@@ -159,7 +159,7 @@ class atk4(pygame.sprite.Sprite):
         self.dire=2
         self.var_y=0
         self.vida= 1000
-        self.daño= 300
+        self.dano= 300
         self.sonido=pygame.mixer.Sound("sonidos/Monster1.ogg")
         self.sonido.play()
 
@@ -190,7 +190,7 @@ class Bala(pygame.sprite.Sprite):
         self.rect.x=x
         self.rect.y=y
         self.var_y=4
-        self.daño= 200
+        self.dano = 200
 
     def update(self,surface):
         self.rect.y += self.var_y
