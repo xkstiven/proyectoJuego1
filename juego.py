@@ -12,11 +12,26 @@ MORADO=[255,0,255]
 GRIS=[137,137,137]
 BLANCO=[255,255,255]
 
+def CargarFondo(archivo,ancho_corte,alto_corte):
+    imagen = pygame.image.load(archivo).convert_alpha()
+    img_ancho ,img_alto = imagen.get_size()
+    #print img_alto , '' , img_ancho
+    matriz_fondo=[]
+    for fila in range(0,int(img_ancho/ancho_corte)):
+        linea=[]
+        for columna in range(0, int(img_alto/alto_corte)):
+            cuadro = (fila*ancho_corte,columna*alto_corte,ancho_corte,alto_corte)
+            linea.append(imagen.subsurface(cuadro))
+        matriz_fondo.append(linea)
+    return matriz_fondo
+
 if __name__ == '__main__':
     os.environ['SDL_VIDEO_CENTERED'] = '1'
     pygame.init()
     pantalla = pygame.display.set_mode([ANCHO,ALTO])
-    pantalla.fill(BLANCO)
+    fondo=pygame.image.load("imagenes/fondo.png")
+    animal = CargarFondo('imagenes/atacantes.png',32,32)
+    pantalla.blit(fondo,(0,0))
 
     todos=pygame.sprite.Group()
     torres=pygame.sprite.Group()
@@ -62,8 +77,6 @@ if __name__ == '__main__':
     tor2.rect.x= 288
     torres.add(tor2)
 
-    print (tor1.rect.center)
-    print (tor2.rect.center)
     temporizador = 20
     temporDis= 40
     elixir= 5
@@ -136,6 +149,7 @@ if __name__ == '__main__':
 
                         if bl.rect.x < 200:
                             bl.var_x *= -1
+                            bl.dir=1
 
                         if bl.rect.y < 395:
                             bl.rect.y = 396
@@ -170,11 +184,12 @@ if __name__ == '__main__':
                 balas.remove(bal)
 
         n=0
-        pantalla.fill(BLANCO)
+        pantalla.blit(fondo,(0,0))
         pygame.draw.rect(pantalla,GRIS,[0,530,400,600]) #espacio iconos
         pygame.draw.rect(pantalla,NEGRO,[0,0,600,40])  # espacio tiempo y elixir (cantidad para comprar tropas)
 
         for atac in atacantes:
+            atac.image = animal[atac.ind + atac.con][atac.dire]
             coli = pygame.sprite.spritecollide(atac,torres,False)
             for elemento in coli:
                 atac.var_x=0
