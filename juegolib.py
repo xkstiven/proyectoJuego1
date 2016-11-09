@@ -27,9 +27,8 @@ class icono(pygame.sprite.Sprite):
 class Torre(pygame.sprite.Sprite):
     def __init__(self): #archivo
         pygame.sprite.Sprite.__init__(self)
-        self.image=pygame.Surface([64,64])
+        self.image=pygame.image.load("imagenes/torre1.png")
         self.rect=self.image.get_rect()
-        self.image.fill(ROJO)
         self.vida=3000
 
     def update(self,surface):
@@ -182,9 +181,8 @@ class atk4(pygame.sprite.Sprite):
 class Bala(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
-        self.image=pygame.Surface([16,16])
+        self.image=pygame.image.load("imagenes/ball.png")
         self.rect=self.image.get_rect()
-        self.image.fill(VERAZUL)
         self.rect.x=x
         self.rect.y=y
         self.var_y=5

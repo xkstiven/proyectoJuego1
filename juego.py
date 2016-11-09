@@ -29,9 +29,13 @@ if __name__ == '__main__':
     os.environ['SDL_VIDEO_CENTERED'] = '1'
     pygame.init()
     pantalla = pygame.display.set_mode([ANCHO,ALTO])
-    fondo=pygame.image.load("imagenes/fondo.png")
+    fondo=pygame.image.load("imagenes/map.png")
     animal = CargarFondo('imagenes/atacantes.png',32,32)
+    barrasup= pygame.image.load("imagenes/barra.png")
+    barrainf= pygame.image.load("imagenes/barrainf.png")
+    pantalla.blit(barrainf,(0,530))
     pantalla.blit(fondo,(0,0))
+    pantalla.blit(barrasup,(0,0))
 
     todos=pygame.sprite.Group()
     torres=pygame.sprite.Group()
@@ -100,6 +104,7 @@ if __name__ == '__main__':
                             if elixir >= ic.costo:
                                 b = atk1()
                                 elixir -= b.costo
+                                temporizador=10
                                 cont += 1
                                 b.id = cont
                                 b.rect.center = pygame.mouse.get_pos()
@@ -107,6 +112,7 @@ if __name__ == '__main__':
                             if elixir >= ic.costo:
                                 b = atk2()
                                 elixir -= b.costo
+                                temporizador=10
                                 cont += 1
                                 b.id = cont
                                 b.rect.center = pygame.mouse.get_pos()
@@ -114,6 +120,7 @@ if __name__ == '__main__':
                             if elixir >= ic.costo:
                                 b = atk3()
                                 elixir -= b.costo
+                                temporizador=10
                                 cont += 1
                                 b.id = cont
                                 b.rect.center = pygame.mouse.get_pos()
@@ -121,6 +128,7 @@ if __name__ == '__main__':
                             if elixir >= ic.costo:
                                 b = atk4()
                                 elixir -= b.costo
+                                temporizador=10
                                 cont += 1
                                 b.id = cont
                                 b.rect.center = pygame.mouse.get_pos()
@@ -185,8 +193,10 @@ if __name__ == '__main__':
 
         n=0
         pantalla.blit(fondo,(0,0))
-        pygame.draw.rect(pantalla,GRIS,[0,530,400,600]) #espacio iconos
-        pygame.draw.rect(pantalla,NEGRO,[0,0,600,40])  # espacio tiempo y elixir (cantidad para comprar tropas)
+        pantalla.blit(barrasup,(0,0))
+        pantalla.blit(barrainf,(0,530))
+        #pygame.draw.rect(pantalla,GRIS,[0,530,400,600]) #espacio iconos
+        #pygame.draw.rect(pantalla,NEGRO,[0,0,600,40])  # espacio tiempo y elixir (cantidad para comprar tropas)
 
         for atac in atacantes:
             atac.image = animal[atac.ind + atac.con][atac.dire]
@@ -208,7 +218,7 @@ if __name__ == '__main__':
             xposini=(n*40)+5
             pygame.draw.rect(pantalla,MORADO,[xposini,10,30,10])
             n += 1
-        pygame.draw.rect(pantalla,AZUL,[0,364,400,32])   #Rio central solo decorativo
+        #pygame.draw.rect(pantalla,AZUL,[0,364,400,32])   #Rio central solo decorativo
         atacantes.update(pantalla)
         balas.update(pantalla)
         todos.update(pantalla)
